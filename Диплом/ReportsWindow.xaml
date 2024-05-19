@@ -1,0 +1,103 @@
+﻿<Window x:Class="Диплом.ReportsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Диплом"
+        Title="Database Table" Height="400" Width="600" WindowState="Maximized" >
+    <Window.Resources>
+        <!-- Стиль для кнопок -->
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#008B8B"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5" Height="30" Width="90">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Триггер для подсветки при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5957f7fe"/>
+                                <!-- Новый цвет фона при наведении -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="Background" Value="#E0EEEE"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#F0F8FF"/>
+            <Setter Property="RowHeight" Value="30"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="GridLinesVisibility" Value="All"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGrid">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="DG_ScrollViewer"
+                                  Focusable="false">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <!-- Resource для выделения строк -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#6495ED"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#D3D3D3"/>
+            </Style.Resources>
+        </Style>
+
+
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- Левая колонка для кнопок -->
+            <ColumnDefinition Width="*"/>
+            <!-- Правая колонка для DataGrid -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель с кнопками -->
+        <StackPanel Grid.Column="0" Orientation="Vertical" Background="#008B8B">
+            <Button Content="Добавить" Click="AddButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="0,25,0,25"/>
+            <Button Content="Редактировать" Click="EditButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="0,0,0,25"/>
+            <Button Content="Удалить" Click="DeleteButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="0,0,0,25"/>
+            <Button Content="Обновить" Click="RefreshButton_Click" Style="{StaticResource CustomButtonStyle}" Margin="0,0,0,25"/>
+            <Button Content="Назад" Style="{StaticResource CustomButtonStyle}" Click="BackButton_Click"/>
+        </StackPanel>
+
+        <!-- Центральная панель с DataGrid -->
+        <DataGrid Grid.Column="1" x:Name="dataGridReports" 
+                  AutoGenerateColumns="False" CanUserAddRows="False"
+                   Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название отчета" Binding="{Binding НазваниеОтчета}" />
+                <DataGridTextColumn Header="Дата отчета" Binding="{Binding ДатаОтчета}" />
+                <DataGridTextColumn Header="Описание отчета" Binding="{Binding СодержаниеОтчета}" />
+                <DataGridTextColumn Header="Сотрудник" Binding="{Binding EmployeeName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

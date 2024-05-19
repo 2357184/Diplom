@@ -1,0 +1,607 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SecretariesDB1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Задачи">
+          <Key>
+            <PropertyRef Name="КодЗадачи" />
+          </Key>
+          <Property Name="КодЗадачи" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеЗадачи" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" />
+          <Property Name="КрайнийСрок" Type="date" />
+          <Property Name="Статус" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ЗадачиПроекта">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+            <PropertyRef Name="КодЗадачи" />
+          </Key>
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="КодЗадачи" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="КодКлиента" />
+          </Key>
+          <Property Name="КодКлиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ИмяКлиента" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="КлиентыПроекта">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+            <PropertyRef Name="КодКлиента" />
+          </Key>
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="КодКлиента" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="КодОтдела" />
+          </Key>
+          <Property Name="КодОтдела" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеОтдела" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Отчеты">
+          <Key>
+            <PropertyRef Name="КодОтчета" />
+          </Key>
+          <Property Name="КодОтчета" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодСотрудника" Type="int" />
+          <Property Name="НазваниеОтчета" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ДатаОтчета" Type="date" />
+          <Property Name="СодержаниеОтчета" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Проекты">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+          </Key>
+          <Property Name="КодПроекта" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеПроекта" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ДатаНачала" Type="date" />
+          <Property Name="ДатаОкончания" Type="date" />
+        </EntityType>
+        <EntityType Name="СобытияКалендаря">
+          <Key>
+            <PropertyRef Name="КодСобытия" />
+          </Key>
+          <Property Name="КодСобытия" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="НазваниеСобытия" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ТипСобытия" Type="nvarchar" MaxLength="50" />
+          <Property Name="ДатаСобытия" Type="date" />
+          <Property Name="Место" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Совещания">
+          <Key>
+            <PropertyRef Name="КодСовещания" />
+          </Key>
+          <Property Name="КодСовещания" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодCотрудника" Type="int" />
+          <Property Name="НазваниеСовещания" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ДатаСовещания" Type="date" />
+          <Property Name="Место" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КодРоли" Type="int" />
+          <Property Name="КодОтдела" Type="int" />
+          <Property Name="ПолноеИмя" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ДатаПриемаНаРаботу" Type="date" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="СотрудникиПроекта">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+            <PropertyRef Name="КодСотрудники" />
+          </Key>
+          <Property Name="КодПроекта" Type="int" Nullable="false" />
+          <Property Name="КодСотрудники" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Задача_ЗадачиПроекта">
+          <End Role="Задачи" Type="Self.Задачи" Multiplicity="1" />
+          <End Role="ЗадачиПроекта" Type="Self.ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Задачи">
+              <PropertyRef Name="КодЗадачи" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="КодЗадачи" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Клиент_КлиентыПроекта">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
+          <End Role="КлиентыПроекта" Type="Self.КлиентыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиенты">
+              <PropertyRef Name="КодКлиента" />
+            </Principal>
+            <Dependent Role="КлиентыПроекта">
+              <PropertyRef Name="КодКлиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Организатор_Совещания">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Совещания" Type="Self.Совещания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Совещания">
+              <PropertyRef Name="КодCотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Отдел_Сотрудники">
+          <End Role="Отделы" Type="Self.Отделы" Multiplicity="0..1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отделы">
+              <PropertyRef Name="КодОтдела" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="КодОтдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проект_ЗадачиПроекта">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="ЗадачиПроекта" Type="Self.ЗадачиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="ЗадачиПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проект_КлиентыПроекта">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="КлиентыПроекта" Type="Self.КлиентыПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="КлиентыПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Проект_СотрудникиПроекта">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="1" />
+          <End Role="СотрудникиПроекта" Type="Self.СотрудникиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Проекты">
+              <PropertyRef Name="КодПроекта" />
+            </Principal>
+            <Dependent Role="СотрудникиПроекта">
+              <PropertyRef Name="КодПроекта" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудник_Отчеты">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Отчеты" Type="Self.Отчеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Отчеты">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудник_СотрудникиПроекта">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="1" />
+          <End Role="СотрудникиПроекта" Type="Self.СотрудникиПроекта" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="СотрудникиПроекта">
+              <PropertyRef Name="КодСотрудники" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SecretariesDB1ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Задачи" EntityType="Self.Задачи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЗадачиПроекта" EntityType="Self.ЗадачиПроекта" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="КлиентыПроекта" EntityType="Self.КлиентыПроекта" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Отчеты" EntityType="Self.Отчеты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Проекты" EntityType="Self.Проекты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СобытияКалендаря" EntityType="Self.СобытияКалендаря" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Совещания" EntityType="Self.Совещания" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СотрудникиПроекта" EntityType="Self.СотрудникиПроекта" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Задача_ЗадачиПроекта" Association="Self.FK_Задача_ЗадачиПроекта">
+            <End Role="Задачи" EntitySet="Задачи" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Клиент_КлиентыПроекта" Association="Self.FK_Клиент_КлиентыПроекта">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="КлиентыПроекта" EntitySet="КлиентыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Организатор_Совещания" Association="Self.FK_Организатор_Совещания">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Совещания" EntitySet="Совещания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Отдел_Сотрудники" Association="Self.FK_Отдел_Сотрудники">
+            <End Role="Отделы" EntitySet="Отделы" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проект_ЗадачиПроекта" Association="Self.FK_Проект_ЗадачиПроекта">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="ЗадачиПроекта" EntitySet="ЗадачиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проект_КлиентыПроекта" Association="Self.FK_Проект_КлиентыПроекта">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="КлиентыПроекта" EntitySet="КлиентыПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Проект_СотрудникиПроекта" Association="Self.FK_Проект_СотрудникиПроекта">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="СотрудникиПроекта" EntitySet="СотрудникиПроекта" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудник_Отчеты" Association="Self.FK_Сотрудник_Отчеты">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Отчеты" EntitySet="Отчеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудник_СотрудникиПроекта" Association="Self.FK_Сотрудник_СотрудникиПроекта">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="СотрудникиПроекта" EntitySet="СотрудникиПроекта" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SecretariesDB1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Задачи">
+          <Key>
+            <PropertyRef Name="КодЗадачи" />
+          </Key>
+          <Property Name="КодЗадачи" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеЗадачи" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="КрайнийСрок" Type="DateTime" Precision="0" />
+          <Property Name="Статус" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Проекты" Relationship="Self.ЗадачиПроекта" FromRole="Задачи" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="КодКлиента" />
+          </Key>
+          <Property Name="КодКлиента" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ИмяКлиента" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Проекты" Relationship="Self.КлиентыПроекта" FromRole="Клиенты" ToRole="Проекты" />
+        </EntityType>
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="КодОтдела" />
+          </Key>
+          <Property Name="КодОтдела" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеОтдела" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK_Отдел_Сотрудники" FromRole="Отделы" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Отчеты">
+          <Key>
+            <PropertyRef Name="КодОтчета" />
+          </Key>
+          <Property Name="КодОтчета" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодСотрудника" Type="Int32" />
+          <Property Name="НазваниеОтчета" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ДатаОтчета" Type="DateTime" Precision="0" />
+          <Property Name="СодержаниеОтчета" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK_Сотрудник_Отчеты" FromRole="Отчеты" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Проекты">
+          <Key>
+            <PropertyRef Name="КодПроекта" />
+          </Key>
+          <Property Name="КодПроекта" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеПроекта" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ДатаНачала" Type="DateTime" Precision="0" />
+          <Property Name="ДатаОкончания" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Задачи" Relationship="Self.ЗадачиПроекта" FromRole="Проекты" ToRole="Задачи" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.КлиентыПроекта" FromRole="Проекты" ToRole="Клиенты" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.СотрудникиПроекта" FromRole="Проекты" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="СобытияКалендаря">
+          <Key>
+            <PropertyRef Name="КодСобытия" />
+          </Key>
+          <Property Name="КодСобытия" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="НазваниеСобытия" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ТипСобытия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ДатаСобытия" Type="DateTime" Precision="0" />
+          <Property Name="Место" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Совещания">
+          <Key>
+            <PropertyRef Name="КодСовещания" />
+          </Key>
+          <Property Name="КодСовещания" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодCотрудника" Type="Int32" />
+          <Property Name="НазваниеСовещания" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ДатаСовещания" Type="DateTime" Precision="0" />
+          <Property Name="Место" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="Self.FK_Организатор_Совещания" FromRole="Совещания" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="КодСотрудника" />
+          </Key>
+          <Property Name="КодСотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КодРоли" Type="Int32" />
+          <Property Name="КодОтдела" Type="Int32" />
+          <Property Name="ПолноеИмя" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ДатаПриемаНаРаботу" Type="DateTime" Precision="0" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Отделы" Relationship="Self.FK_Отдел_Сотрудники" FromRole="Сотрудники" ToRole="Отделы" />
+          <NavigationProperty Name="Отчеты" Relationship="Self.FK_Сотрудник_Отчеты" FromRole="Сотрудники" ToRole="Отчеты" />
+          <NavigationProperty Name="Совещания" Relationship="Self.FK_Организатор_Совещания" FromRole="Сотрудники" ToRole="Совещания" />
+          <NavigationProperty Name="Проекты" Relationship="Self.СотрудникиПроекта" FromRole="Сотрудники" ToRole="Проекты" />
+        </EntityType>
+        <Association Name="FK_Отдел_Сотрудники">
+          <End Role="Отделы" Type="Self.Отделы" Multiplicity="0..1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Отделы">
+              <PropertyRef Name="КодОтдела" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="КодОтдела" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудник_Отчеты">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Отчеты" Type="Self.Отчеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Отчеты">
+              <PropertyRef Name="КодСотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Организатор_Совещания">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Совещания" Type="Self.Совещания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="КодСотрудника" />
+            </Principal>
+            <Dependent Role="Совещания">
+              <PropertyRef Name="КодCотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ЗадачиПроекта">
+          <End Role="Задачи" Type="Self.Задачи" Multiplicity="*" />
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
+        </Association>
+        <Association Name="КлиентыПроекта">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="*" />
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
+        </Association>
+        <Association Name="СотрудникиПроекта">
+          <End Role="Проекты" Type="Self.Проекты" Multiplicity="*" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SecretariesDB1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Задачи" EntityType="Self.Задачи" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" />
+          <EntitySet Name="Отчеты" EntityType="Self.Отчеты" />
+          <EntitySet Name="Проекты" EntityType="Self.Проекты" />
+          <EntitySet Name="СобытияКалендаря" EntityType="Self.СобытияКалендаря" />
+          <EntitySet Name="Совещания" EntityType="Self.Совещания" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" />
+          <AssociationSet Name="FK_Отдел_Сотрудники" Association="Self.FK_Отдел_Сотрудники">
+            <End Role="Отделы" EntitySet="Отделы" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудник_Отчеты" Association="Self.FK_Сотрудник_Отчеты">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Отчеты" EntitySet="Отчеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Организатор_Совещания" Association="Self.FK_Организатор_Совещания">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Совещания" EntitySet="Совещания" />
+          </AssociationSet>
+          <AssociationSet Name="ЗадачиПроекта" Association="Self.ЗадачиПроекта">
+            <End Role="Задачи" EntitySet="Задачи" />
+            <End Role="Проекты" EntitySet="Проекты" />
+          </AssociationSet>
+          <AssociationSet Name="КлиентыПроекта" Association="Self.КлиентыПроекта">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="Проекты" EntitySet="Проекты" />
+          </AssociationSet>
+          <AssociationSet Name="СотрудникиПроекта" Association="Self.СотрудникиПроекта">
+            <End Role="Проекты" EntitySet="Проекты" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SecretariesDB1ModelContainer" CdmEntityContainer="SecretariesDB1Entities1">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Задачи">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Задачи">
+              <MappingFragment StoreEntitySet="Задачи">
+                <ScalarProperty Name="КодЗадачи" ColumnName="КодЗадачи" />
+                <ScalarProperty Name="НазваниеЗадачи" ColumnName="НазваниеЗадачи" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="КрайнийСрок" ColumnName="КрайнийСрок" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Клиенты">
+              <MappingFragment StoreEntitySet="Клиенты">
+                <ScalarProperty Name="КодКлиента" ColumnName="КодКлиента" />
+                <ScalarProperty Name="ИмяКлиента" ColumnName="ИмяКлиента" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отделы">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Отделы">
+              <MappingFragment StoreEntitySet="Отделы">
+                <ScalarProperty Name="КодОтдела" ColumnName="КодОтдела" />
+                <ScalarProperty Name="НазваниеОтдела" ColumnName="НазваниеОтдела" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отчеты">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Отчеты">
+              <MappingFragment StoreEntitySet="Отчеты">
+                <ScalarProperty Name="КодОтчета" ColumnName="КодОтчета" />
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="НазваниеОтчета" ColumnName="НазваниеОтчета" />
+                <ScalarProperty Name="ДатаОтчета" ColumnName="ДатаОтчета" />
+                <ScalarProperty Name="СодержаниеОтчета" ColumnName="СодержаниеОтчета" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Проекты">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Проекты">
+              <MappingFragment StoreEntitySet="Проекты">
+                <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+                <ScalarProperty Name="НазваниеПроекта" ColumnName="НазваниеПроекта" />
+                <ScalarProperty Name="ДатаНачала" ColumnName="ДатаНачала" />
+                <ScalarProperty Name="ДатаОкончания" ColumnName="ДатаОкончания" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СобытияКалендаря">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.СобытияКалендаря">
+              <MappingFragment StoreEntitySet="СобытияКалендаря">
+                <ScalarProperty Name="КодСобытия" ColumnName="КодСобытия" />
+                <ScalarProperty Name="НазваниеСобытия" ColumnName="НазваниеСобытия" />
+                <ScalarProperty Name="ТипСобытия" ColumnName="ТипСобытия" />
+                <ScalarProperty Name="ДатаСобытия" ColumnName="ДатаСобытия" />
+                <ScalarProperty Name="Место" ColumnName="Место" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Совещания">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Совещания">
+              <MappingFragment StoreEntitySet="Совещания">
+                <ScalarProperty Name="КодСовещания" ColumnName="КодСовещания" />
+                <ScalarProperty Name="КодCотрудника" ColumnName="КодCотрудника" />
+                <ScalarProperty Name="НазваниеСовещания" ColumnName="НазваниеСовещания" />
+                <ScalarProperty Name="ДатаСовещания" ColumnName="ДатаСовещания" />
+                <ScalarProperty Name="Место" ColumnName="Место" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="SecretariesDB1Model.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудника" />
+                <ScalarProperty Name="КодРоли" ColumnName="КодРоли" />
+                <ScalarProperty Name="КодОтдела" ColumnName="КодОтдела" />
+                <ScalarProperty Name="ПолноеИмя" ColumnName="ПолноеИмя" />
+                <ScalarProperty Name="ДатаПриемаНаРаботу" ColumnName="ДатаПриемаНаРаботу" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ЗадачиПроекта" TypeName="SecretariesDB1Model.ЗадачиПроекта" StoreEntitySet="ЗадачиПроекта">
+            <EndProperty Name="Задачи">
+              <ScalarProperty Name="КодЗадачи" ColumnName="КодЗадачи" />
+            </EndProperty>
+            <EndProperty Name="Проекты">
+              <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="КлиентыПроекта" TypeName="SecretariesDB1Model.КлиентыПроекта" StoreEntitySet="КлиентыПроекта">
+            <EndProperty Name="Клиенты">
+              <ScalarProperty Name="КодКлиента" ColumnName="КодКлиента" />
+            </EndProperty>
+            <EndProperty Name="Проекты">
+              <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="СотрудникиПроекта" TypeName="SecretariesDB1Model.СотрудникиПроекта" StoreEntitySet="СотрудникиПроекта">
+            <EndProperty Name="Проекты">
+              <ScalarProperty Name="КодПроекта" ColumnName="КодПроекта" />
+            </EndProperty>
+            <EndProperty Name="Сотрудники">
+              <ScalarProperty Name="КодСотрудника" ColumnName="КодСотрудники" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

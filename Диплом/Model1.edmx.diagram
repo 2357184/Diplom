@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ddd4ea56e2b44969a5fed3f63a071d0" Name="Diagram1">
+        <EntityTypeShape EntityType="SecretariesDB1Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Задачи" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Клиенты" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Отделы" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Отчеты" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Проекты" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.СобытияКалендаря" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Совещания" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SecretariesDB1Model.Сотрудники" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="SecretariesDB1Model.FK_Отдел_Сотрудники" ManuallyRouted="false" />
+        <AssociationConnector Association="SecretariesDB1Model.FK_Сотрудник_Отчеты" ManuallyRouted="false" />
+        <AssociationConnector Association="SecretariesDB1Model.FK_Организатор_Совещания" ManuallyRouted="false" />
+        <AssociationConnector Association="SecretariesDB1Model.ЗадачиПроекта" ManuallyRouted="false" />
+        <AssociationConnector Association="SecretariesDB1Model.КлиентыПроекта" ManuallyRouted="false" />
+        <AssociationConnector Association="SecretariesDB1Model.СотрудникиПроекта" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

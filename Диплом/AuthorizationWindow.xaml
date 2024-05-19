@@ -1,0 +1,72 @@
+﻿<Window x:Class="Диплом.AuthorizationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="450" Width="800" 
+        Background="DarkCyan"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Стиль для основного контейнера -->
+        <Style TargetType="Border" x:Key="LoginBorderStyle">
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Width" Value="550"/>
+            <Setter Property="Height" Value="280"/>
+            <Setter Property="Background" Value="#5957f7fe"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <!-- Стиль для подписи "Авторизация" -->
+        <Style TargetType="Label" x:Key="LoginLabelStyle">
+            <Setter Property="Margin" Value="0 10 0 0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Visibility" Value="Visible"/>
+            <Setter Property="Opacity" Value="0.81"/>
+            <Setter Property="Content" Value="Авторизация"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Стиль для текстового поля -->
+        <Style TargetType="TextBox" x:Key="LoginTextBoxStyle">
+            <Setter Property="Margin" Value="0 20 0 0"/>
+            <Setter Property="MaxWidth" Value="400"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+        <!-- Стиль для парольного поля -->
+        <Style TargetType="PasswordBox" x:Key="LoginPasswordBoxStyle">
+            <Setter Property="Margin" Value="0 25 0 20"/>
+            <Setter Property="MaxWidth" Value="400"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
+
+    </Window.Resources>
+
+    <Grid>
+        <!-- Основной контейнер с элементами -->
+        <Border Style="{StaticResource LoginBorderStyle}">
+            <StackPanel>
+                <!-- Подпись "Авторизация" -->
+                <Label Style="{StaticResource LoginLabelStyle}"/>
+
+                <!-- Текстовое поле для логина -->
+                <TextBox x:Name="textBox_Login" Style="{StaticResource LoginTextBoxStyle}"/>
+
+                <!-- Парольное поле -->
+                <PasswordBox x:Name="passwordBox_Password" Style="{StaticResource LoginPasswordBoxStyle}"/>
+
+                <!-- Кнопка "Войти" -->
+                <Button Content="Войти" Style="{StaticResource button_style}" Click="Button_Auth_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
